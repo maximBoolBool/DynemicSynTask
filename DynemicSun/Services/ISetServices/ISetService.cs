@@ -2,7 +2,7 @@
 
 namespace DynemicSun.Services.ISetServices;
 
-public interface iSetService
+public interface ISetService
 {
     public Task AddYearsToDb(List<Year> years);
     

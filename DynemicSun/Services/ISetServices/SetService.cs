@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DynemicSun.Services.ISetServices;
 
-public class SetService : iSetService
+public class SetService : ISetService
 {
     private ApplicationContext db;
 
