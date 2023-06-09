@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using DynemicSun.Models;
 using DynemicSun.Services.ISetServices;
 using DynemicSun.Services.ITranslateServices;
+using NPOI.SS.Formula.Functions;
 
 namespace DynemicSun.Controllers;
 
@@ -31,10 +32,12 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddNewArchive(IFormFileCollection collection)
+    [Route("AddNewArchive")]
+    public async Task<IActionResult> AddNewArchive()
     {
-        translator.FromExcelsToYears(collection);
-        return View();
+        IFormFileCollection files = Request.Form.Files;
+        List<Year> years = await translator.FromExcelsToYears(files);
+        await setService.AddYearsToDb(years);
+        return Redirect("AddNewArchiveForm");
     }
-    
 }

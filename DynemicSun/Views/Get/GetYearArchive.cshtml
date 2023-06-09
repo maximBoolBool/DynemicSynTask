@@ -1,4 +1,4 @@
-﻿
+﻿@model Year
 
 <!DOCTYPE html>
 
@@ -8,7 +8,44 @@
 </head>
 <body>
 <div>
-    <h1>Годовой архив</h1>
+    <h1>Годовой архив погоды за @Model.Value</h1>
+    @foreach (var month in Model.Months)
+    {
+        <h1>@month.Name</h1>
+        <table border="2" cellspacing="10px" cellpadding="10px">
+            <tr>
+                <td>Дата</td>
+                <td>Время</td>
+                <td>Температура</td>
+                <td>Относительная влажность</td>
+                <td>Точка росы</td>
+                <td>Атм. Давление</td>
+                <td>Направление ветра</td>
+                <td>Скорость ветра</td>
+                <td>Облачность</td>
+                <td>Нижняя граница облочности</td>
+                <td>Горизонтальная видимость</td>
+                <td>Погодные явления</td>
+            </tr>
+            @foreach (WeatherMeasurement measurement in month.WeatherMeasurements)
+            {
+                <tr>
+                    <td>@measurement.Date</td>
+                    <td>@measurement.Time</td>
+                    <td>@measurement.Temperature</td>
+                    <td>@measurement.AirRelativeHumidity</td>
+                    <td>@measurement.DewPoint</td>
+                    <td>@measurement.AtmospericPressure</td>
+                    <td>@measurement.AirDirection</td>
+                    <td>@measurement.AirSpeed</td>
+                    <td>@measurement.CloudCover</td>
+                    <td>@measurement.LowerCloudLimit</td>
+                    <td>@measurement.VisualVisibility</td>
+                    <td>@measurement.WeatherPhenomena</td>
+                </tr>
+            }
+        </table>
+    }
 </div>
 </body>
 </html>

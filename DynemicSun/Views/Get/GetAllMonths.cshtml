@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿@model List<string>
 
 <html>
 <head>
@@ -6,7 +6,13 @@
 </head>
 <body>
 <div>
-      
+    <div>Месяца:</div>
+    @foreach (string year in Model)
+    {
+        <form asp-action="GetMonthArchive" method="post">
+            <input type="submit" name="year" value="@year">
+        </form>
+    }
 </div>
 </body>
 </html>

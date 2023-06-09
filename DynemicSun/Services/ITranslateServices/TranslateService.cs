@@ -1,10 +1,10 @@
-﻿using DynemicSun.Models;
+﻿using System.Net;
+using DynemicSun.Models;
 using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 
 namespace DynemicSun.Services.ITranslateServices;
-
 public class TranslateService : ITranslateService
 {
     public async Task<List<Year>> FromExcelsToYears(IFormFileCollection collections)
@@ -12,8 +12,15 @@ public class TranslateService : ITranslateService
         List<Year> response = new List<Year>();
         foreach (var formFile in collections)
         {
-            Year year = await FromExcelsToYear(formFile.OpenReadStream());
-            response.Add(year);
+            try
+            {
+                Year year = await FromExcelsToYear(formFile.OpenReadStream());
+                response.Add(year);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         return response;
     }

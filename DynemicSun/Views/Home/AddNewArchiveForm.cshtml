@@ -1,14 +1,18 @@
-﻿
-
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>title</title>
 </head>
 <body>
 <div>
-      <input type="file" multiple="multiple" required="required" accept="application/vnd.sealed.xls">
+
+    
+    <form asp-action="AddNewArchive" asp-controller="Home" method="post" enctype="multipart/form-data">
+        <input type="file" name="uploads" multiple="multiple"/><br>
+        <input type="submit" value="Загрузить" />
+    </form>
+    
+    
 </div>
 </body>
 </html>

@@ -1,5 +1,7 @@
-﻿using DynemicSun.Services.IGetServices;
+﻿using DynemicSun.Models;
+using DynemicSun.Services.IGetServices;
 using Microsoft.AspNetCore.Mvc;
+using NPOI.XSSF.Streaming.Values;
 
 namespace DynemicSun.Controllers;
 
@@ -12,24 +14,35 @@ public class GetController : Controller
         getService = _getService;
     }
 
+    [Route("GetAllMonths")]
     public async Task<IActionResult> GetAllMonths()
     {
-        return View();
+        List<string?> months = await getService.GetMonths();
+        return View(months);
     }
 
+    [Route("GetAllYears")]
     public async Task<IActionResult> GetAllYears()
     {
-        return View();
+        List<int> years = await getService.GetYears();
+        return View(years);
     }
 
+    [HttpPost]
+    [Route("GetMonthArchive")]
     public async Task<IActionResult> GetMonthArchive()
     {
-        return View();
+        string? month = Request.Form["month"];
+        Month responseMonth = await getService.GetMonth(month); 
+        return View(responseMonth);
     }
 
+    [Route("GetYearArchive")]
     public async Task<IActionResult> GetYearArchive()
     {
-        return View();
+        int yearValue = int.Parse(Request.Form["year"]);
+        Year? year = await getService.GetYear(yearValue);
+        return View(year);
     }
 
     [Route("GetChoosePage")]

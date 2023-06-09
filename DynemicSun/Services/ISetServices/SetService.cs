@@ -15,10 +15,9 @@ public class SetService : ISetService
     public async Task AddYearsToDb(List<Year> years)
     {
         List<int> dbYears = await db.Years.Select(y => y.Value).ToListAsync();
-        
-        var addList = years.Select(y=> y.Value).Except(dbYears);
-
-        await db.Years.AddRangeAsync(years.Where(y => addList.Contains(y.Value)));
+        List<int> valueYears = years.Select(y => y.Value).ToList();
+        List<int> res = valueYears.Except(dbYears).ToList();
+        await db.Years.AddRangeAsync(years.Where(y => res.Contains(y.Value)));
         await db.SaveChangesAsync();
     }
 }
