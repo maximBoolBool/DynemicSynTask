@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace DynemicSun.Models;
 
+[Index("Name")]
 public class Month
 {
     public int Id { get; set; }

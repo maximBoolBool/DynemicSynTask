@@ -24,7 +24,7 @@ public class GetController : Controller
     [Route("GetAllYears")]
     public async Task<IActionResult> GetAllYears()
     {
-        List<int> years = await getService.GetYears();
+        List<int?> years = await getService.GetYears();
         return View(years);
     }
 
@@ -33,7 +33,9 @@ public class GetController : Controller
     public async Task<IActionResult> GetMonthArchive()
     {
         string? month = Request.Form["month"];
-        Month responseMonth = await getService.GetMonth(month); 
+        Month responseMonth = await getService.GetMonth(month);
+        List<string?> neighbords = await getService.GetNeighborsMonth(responseMonth.WeatherMeasurements.First().Date);
+        ViewBag.Neighbords = neighbords;
         return View(responseMonth);
     }
 
@@ -42,7 +44,12 @@ public class GetController : Controller
     {
         int yearValue = int.Parse(Request.Form["year"]);
         Year? year = await getService.GetYear(yearValue);
-        return View(year);
+        List<int?> neighbors = await getService.GetNeighborsYears(year.Id);
+        return View(new ResponseClass<Year>()
+        {
+            Content = year,
+            Neighbors = neighbors,
+        });
     }
 
     [Route("GetChoosePage")]

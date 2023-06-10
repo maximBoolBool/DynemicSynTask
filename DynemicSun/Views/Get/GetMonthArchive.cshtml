@@ -8,6 +8,14 @@
 </head>
 <body>
 <div>
+    <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+    @foreach (string k in ViewBag.Neighbords)
+    {
+        <form asp-action="GetMonthArchive" method="post">
+            <input type="submit" name="month" value="@k">
+        </form>
+    }
+    </div>
     <h1>Месячный архив за @Model.Name</h1>
     <table border="2" cellspacing="10px" cellpadding="10px">
         <tr>
