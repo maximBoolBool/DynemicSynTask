@@ -2,7 +2,6 @@
 using DynemicSun.Services.IGetServices;
 using Microsoft.AspNetCore.Mvc;
 using NPOI.XSSF.Streaming.Values;
-
 namespace DynemicSun.Controllers;
 
 public class GetController : Controller
