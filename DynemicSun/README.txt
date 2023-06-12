@@ -20,3 +20,6 @@ Services
 
 ApplicatioContext
 класс для работы с бд
+
+
+строка подключения к бд нахлдится в appsetings.json
